@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <div id="app">
-      <component v-bind:is="layout">
-        <router-view/>
-      </component>
-    </div>
+    <component v-bind:is="layout">
+      <router-view/>
+    </component>
+    <v-footer app>
+    </v-footer>
   </v-app>
 </template>
 

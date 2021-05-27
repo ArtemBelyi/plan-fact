@@ -1,11 +1,9 @@
 <template>
     <div>
       <Navbar/>
-      <main class="app-content">
-        <div class="app-page">
+      <v-content class="mx-3 my-4">
           <router-view/>
-        </div>
-      </main>
+      </v-content>
     </div>
 </template>
 
