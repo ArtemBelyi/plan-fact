@@ -159,6 +159,7 @@
           </v-flex>
         </v-layout>
       </v-card>
+      <!-- button -->
       <v-card flat class="pa-5">
         <v-layout row wrap>
           <v-flex xs12 md3>
@@ -204,10 +205,15 @@
           </v-flex>
         </v-layout>
       </v-card>
-      <v-card flat class="pa-5" v-show="tableShow" v-for="(item, index) in selectedPlans" :key="index">
+      <!-- tables -->
+      <v-card flat class="pa-5"
+       v-show="tableShow" 
+       v-for="(item, index) in selectedPlans" 
+       :key="index"
+       >
         <v-layout row wrap>
           <v-flex xs12>
-            <TablesVue />
+            <TablesVue :dataPlans="item" />
           </v-flex>
         </v-layout>
       </v-card>
