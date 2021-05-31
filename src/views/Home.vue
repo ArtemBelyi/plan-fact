@@ -165,9 +165,49 @@
             <v-btn
               depressed
               color="primary"
+              @click.stop="isTableShow"
             >
               Сформировать отчет
             </v-btn>
+            <v-snackbar
+              v-model="snackbarEmplayee"
+              :multi-line="multiLine"
+            >
+              {{ textSnackbarEmplayee }}
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                  color="red"
+                  text
+                  v-bind="attrs"
+                  @click="snackbarEmplayee = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
+             <v-snackbar
+              v-model="snackbarPlans"
+              :multi-line="multiLine"
+            >
+              {{ textSnackbarPlans }}
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                  color="red"
+                  text
+                  v-bind="attrs"
+                  @click="snackbarPlans = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
+          </v-flex>
+        </v-layout>
+      </v-card>
+      <v-card flat class="pa-5" v-show="tableShow" v-for="(item, index) in selectedPlans" :key="index">
+        <v-layout row wrap>
+          <v-flex xs12>
+            <TablesVue />
           </v-flex>
         </v-layout>
       </v-card>
@@ -176,6 +216,7 @@
 </template>
 
 <script>
+import TablesVue from '../components/Tables.vue';
 export default {
   name: "Home",
   data: () => ({
@@ -186,9 +227,15 @@ export default {
     emplayees: ['Артем Белый', 'Денис Новичков', 'Денис Хренов', 'Алена Попова', 'Роман Зимин', 'Роман Кычин', 'Сергей Егай', 'Сергей Хомяков', 'Михайл Твердохлеб', 'Филипп Рацков', 'Артем Соколов', 'Александр Артемов', 'Екатерина Ким', 'Владимир Зудилин', 'Дарья Белая'],
     plans: ['Исходящие звонки', 'Отправлено КП', 'Проведено встреч', 'Заключено договоров', 'Закрыто сделок', 'Сумма сделок'],
     selectedEmplayees: [],
-    selectedPlans: []
+    selectedPlans: [],
+    tableShow: false,
+    multiLine: true,
+    snackbarEmplayee: false,
+    snackbarPlans: false,
+    textSnackbarEmplayee: 'Не выбраны сотрудники',
+    textSnackbarPlans: 'Не выбраны показатели'
   }),
-  components: {},
+  components: { TablesVue },
   methods: {
     toggleEmplayees () {
       this.$nextTick(() => {
@@ -207,6 +254,15 @@ export default {
           this.selectedPlans = this.plans.slice()
         }
       })
+    },
+    isTableShow () {
+      if (this.selectedEmplayees.length == 0) {
+        return this.snackbarEmplayee = true
+      } else if (this.selectedPlans.length == 0) {
+        return this.snackbarPlans = true
+      } else {
+        return this.tableShow = true
+      }
     }
   },
   computed: {
