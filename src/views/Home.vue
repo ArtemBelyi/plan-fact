@@ -213,7 +213,7 @@
        >
         <v-layout row wrap>
           <v-flex xs12>
-            <TablesVue :dataPlans="item" />
+            <TablesVue :dataPlans="item" :dataEmplayees="selectedEmplayees"/>
           </v-flex>
         </v-layout>
       </v-card>
