@@ -225,22 +225,24 @@
 import TablesVue from '../components/Tables.vue';
 export default {
   name: "Home",
-  data: () => ({
-    dateStart: new Date().toISOString().substr(0, 10),
-    menuStart: false,
-    dateFinish: new Date().toISOString().substr(0, 10),
-    menuFinish: false,
-    emplayees: ['Артем Белый', 'Денис Новичков', 'Денис Хренов', 'Алена Попова', 'Роман Зимин', 'Роман Кычин', 'Сергей Егай', 'Сергей Хомяков', 'Михайл Твердохлеб', 'Филипп Рацков', 'Артем Соколов', 'Александр Артемов', 'Екатерина Ким', 'Владимир Зудилин', 'Дарья Белая'],
-    plans: ['Исходящие звонки', 'Отправлено КП', 'Проведено встреч', 'Заключено договоров', 'Закрыто сделок', 'Сумма сделок'],
-    selectedEmplayees: [],
-    selectedPlans: [],
-    tableShow: false,
-    multiLine: true,
-    snackbarEmplayee: false,
-    snackbarPlans: false,
-    textSnackbarEmplayee: 'Не выбраны сотрудники',
-    textSnackbarPlans: 'Не выбраны показатели'
-  }),
+  data() {
+    return {
+      dateStart: new Date().toISOString().substr(0, 10),
+      menuStart: false,
+      dateFinish: new Date().toISOString().substr(0, 10),
+      menuFinish: false,
+      emplayees: ['Артем Белый', 'Денис Новичков', 'Денис Хренов', 'Алена Попова', 'Роман Зимин', 'Роман Кычин', 'Сергей Егай', 'Сергей Хомяков', 'Михайл Твердохлеб', 'Филипп Рацков', 'Артем Соколов', 'Александр Артемов', 'Екатерина Ким', 'Владимир Зудилин', 'Дарья Белая'],
+      plans: ['Исходящие звонки', 'Отправлено КП', 'Проведено встреч', 'Заключено договоров', 'Закрыто сделок', 'Сумма сделок'],
+      selectedEmplayees: [],
+      selectedPlans: [],
+      tableShow: false,
+      multiLine: true,
+      snackbarEmplayee: false,
+      snackbarPlans: false,
+      textSnackbarEmplayee: 'Не выбраны сотрудники',
+      textSnackbarPlans: 'Не выбраны показатели'
+    }
+  },
   components: { TablesVue },
   methods: {
     toggleEmplayees () {
