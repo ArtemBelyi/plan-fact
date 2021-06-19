@@ -73,6 +73,66 @@
           </v-flex>
         </v-layout>
       </v-card>
+      <!-- select.plans -->
+      <v-card flat class="pa-5">
+        <v-layout row wrap>
+          <v-flex xs12 md6>
+            <v-select
+              :items="plans"
+              label="Выбрать показатель"
+              v-model="selectedPlans"
+              prepend-icon="mdi-chart-bar"
+            >
+              </v-select>
+          </v-flex>
+        </v-layout>
+      </v-card>
+      <!-- button -->
+      <v-card flat class="pa-5">
+        <v-layout row wrap>
+          <v-flex xs12 md3>
+            <v-btn
+              depressed
+              color="primary"
+              @click.stop="isTableShow"
+            >
+              Выставить план
+            </v-btn>
+            <v-snackbar
+              v-model="snackbarEmplayee"
+              :multi-line="multiLine"
+            >
+              {{ textSnackbarEmplayee }}
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                  color="red"
+                  text
+                  v-bind="attrs"
+                  @click="snackbarEmplayee = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
+             <v-snackbar
+              v-model="snackbarPlans"
+              :multi-line="multiLine"
+            >
+              {{ textSnackbarPlans }}
+              <template v-slot:action="{ attrs }">
+                <v-btn
+                  color="red"
+                  text
+                  v-bind="attrs"
+                  @click="snackbarPlans = false"
+                >
+                  Close
+                </v-btn>
+              </template>
+            </v-snackbar>
+          </v-flex>
+        </v-layout>
+      </v-card>
     </v-container>
   </div>
 </template>
@@ -86,6 +146,13 @@ export default {
       menuPickers: false,
       emplayees: ['Артем Белый', 'Денис Новичков', 'Денис Хренов', 'Алена Попова', 'Роман Зимин', 'Роман Кычин', 'Сергей Егай', 'Сергей Хомяков', 'Михайл Твердохлеб', 'Филипп Рацков', 'Артем Соколов', 'Александр Артемов', 'Екатерина Ким', 'Владимир Зудилин', 'Дарья Белая'],
       selectedEmplayees: [],
+      plans: ['Исходящие звонки', 'Отправлено КП', 'Проведено встреч', 'Заключено договоров', 'Закрыто сделок', 'Сумма сделок'],
+      selectedPlans: undefined,
+      multiLine: true,
+      snackbarEmplayee: false,
+      snackbarPlans: false,
+      textSnackbarEmplayee: 'Не выбраны сотрудники',
+      textSnackbarPlans: 'Не выбран показатель'
     }
   },
   components: {},
@@ -99,6 +166,15 @@ export default {
         }
       })
     },
+    isTableShow () {
+      if (this.selectedEmplayees.length == 0) {
+        return this.snackbarEmplayee = true
+      } else if (!this.selectedPlans) {
+        return this.snackbarPlans = true
+      } else {
+        return this.tableShow = true
+      }
+    }
   },
   computed: {
     likesAllEmplayee () {
