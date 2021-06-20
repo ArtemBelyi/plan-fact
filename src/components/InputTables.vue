@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      {{ dataPlans }}
+      {{ selectedPlans }}
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -15,19 +15,69 @@
       :headers="headers"
       :items="staffArr"
       :search="search"
-    ></v-data-table>
+    >
+    <template v-slot:[`item.plan`]="{ item }">
+      <v-edit-dialog
+          :return-value.sync="item.plan"
+          large
+          persistent
+          @save="save"
+          @close="close"
+        >
+        <div>{{ item.plan }}</div>
+        <template v-slot:input>
+            <div class="mt-4 text-h6">
+              Введите план
+            </div>
+            <v-text-field
+              v-model="item.plan"
+              :rules="[max25chars]"
+              label="Edit"
+              single-line
+              counter
+              autofocus
+            ></v-text-field>
+          </template>
+        </v-edit-dialog>
+    </template>
+    </v-data-table>
+    <v-snackbar
+      v-model="snack"
+      :timeout="1500"
+      :color="snackColor"
+    >
+      {{ snackText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          v-bind="attrs"
+          text
+          @click="snack = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-card>
 </template>
 
 <script>
   export default {
-    props: ['dataPlans', 'dataEmplayees'],
+    props: ['selectedPlans', 'dataEmplayees'],
     methods: {
       staffObj (name) {
-        return {name: name, plan: 0, fact: 0, factpercent: 0}
+        return { name: name, plan: 0 }
       },
       removeNewStaff () {
         this.newStaff.splice(0, this.newStaff.length)
+      },
+      save () {
+        this.snack = true
+        this.snackColor = 'success'
+        this.snackText = 'Data saved'
+      },
+      close () {
+        console.log('Dialog closed')
       }
     },
     computed: {
@@ -47,27 +97,19 @@
           {
             text: 'Сотрудники',
             align: 'start',
-            sortable: false,
             value: 'name',
+            sortable: false,
           },
-          { text: 'План', value: 'plan' },
-          { text: 'Факт', value: 'fact' },
-          { text: 'Факт (%)', value: 'factpercent' }
-        ],
-        staff: [ // не используется, пример объекта для таблицы
-          {
-            name: 'Денис Хренов',
-            plan: 159,
-            fact: 6,
-            factpercent: 24
-          },
-          {
-            name: 'Алена Попова',
-            plan: 237,
-            fact: 9,
-            factpercent: 37
+          { text: 'План', 
+            value: 'plan',
+            sortable: false
           }
         ],
+        snack: false,
+        snackColor: '',
+        snackText: '',
+        max25chars: v => v.length <= 25 || 'Input too long!',
+        pagination: {},
       }
     },
   }

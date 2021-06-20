@@ -47,7 +47,6 @@
           {
             text: 'Сотрудники',
             align: 'start',
-            sortable: false,
             value: 'name',
           },
           { text: 'План', value: 'plan' },

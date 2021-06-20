@@ -133,11 +133,22 @@
           </v-flex>
         </v-layout>
       </v-card>
+      <!-- tables -->
+      <v-card flat class="pa-5"
+       v-show="tableShow" 
+       >
+        <v-layout row wrap>
+          <v-flex xs12>
+            <InputTables :selectedPlans="selectedPlans" :dataEmplayees="selectedEmplayees"/>
+          </v-flex>
+        </v-layout>
+      </v-card>
     </v-container>
   </div>
 </template>
 
 <script>
+import InputTables from '../components/InputTables.vue';
 export default {
   name: "Plans",
   data() {
@@ -152,10 +163,11 @@ export default {
       snackbarEmplayee: false,
       snackbarPlans: false,
       textSnackbarEmplayee: 'Не выбраны сотрудники',
-      textSnackbarPlans: 'Не выбран показатель'
+      textSnackbarPlans: 'Не выбран показатель',
+      tableShow: false
     }
   },
-  components: {},
+  components: { InputTables },
   methods: {
     toggleEmplayees () {
       this.$nextTick(() => {
