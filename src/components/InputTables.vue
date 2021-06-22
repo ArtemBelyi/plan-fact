@@ -109,7 +109,7 @@
         snackColor: '',
         snackText: '',
         max25chars: v => v.length <= 25 || 'Input too long!',
-        pagination: {},
+        pagination: {}
       }
     },
   }
