@@ -35,33 +35,16 @@ export default {
             text: 'ID',
             align: 'start',
             sortable: false,
-            value: 'ID',
+            value: 'id',
           },
           { text: 'ФИО', value: 'name' },
-          { text: 'Должность', value: 'position' }
-        ],
-        emplayees: [
-          {
-            ID: 78,
-            name: 'Денис Хренов',
-            position: 'Аналитик'
-          },
-          {
-            ID: 77,
-            name: 'Денис Новичков',
-            position: 'Маркетолог'
-          },
-          {
-            ID: 76,
-            name: 'Роман Зимин',
-            position: 'Разработчик'
-          },
-          {
-            ID: 75,
-            name: 'Роман Кычин',
-            position: 'Разработчик Yii'
-          }
+          { text: 'Должность', value: 'username' }
         ]
+      }
+    },
+    computed: {
+      emplayees() {
+        return this.$store.getters.STAFF;
       }
     }
 }
