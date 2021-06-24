@@ -6,11 +6,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    staff: []
+    staff: [],
+    changeStaff: []
   },
   mutations: {
     SET_STAFF: (state, response) => {
       state.staff = response;
+    },
+    SET_CHANGE_STAFF: (state, addStaff) => {
+      state.changeStaff = addStaff;
     }
   },
   actions: {
@@ -24,12 +28,17 @@ export default new Vuex.Store({
         console.log(error);
         return error;
       })
+    },
+    GET_CHANGESTAFF({ commit }, addStaff) {
+      return commit('SET_CHANGE_STAFF', addStaff);
     }
   },
   getters: {
     STAFF(state) {
-      console.log(state.staff);
       return state.staff;
+    },
+    CHANGE_STAFF(state) {
+      return state.changeStaff;
     }
   }
 });

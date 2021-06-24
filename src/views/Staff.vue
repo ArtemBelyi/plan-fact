@@ -11,32 +11,8 @@
       </v-card>
       <v-card flat class="pa-5">
         <v-layout row wrap>
-          <v-flex xs12 md3>
-            <v-btn
-              depressed
-              color="primary"
-            >
-              Добавить
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-card>
-      <v-card flat class="pa-5">
-        <v-layout row wrap>
           <v-flex xs12>
            <TableEmplayeesOut/>
-          </v-flex>
-        </v-layout>
-      </v-card>
-      <v-card flat class="pa-5">
-        <v-layout row wrap>
-          <v-flex xs12 md3>
-            <v-btn
-              depressed
-              color="primary"
-            >
-              Сохранить
-            </v-btn>
           </v-flex>
         </v-layout>
       </v-card>
