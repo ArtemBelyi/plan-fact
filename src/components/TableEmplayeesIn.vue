@@ -46,6 +46,9 @@ export default {
       emplayees() {
         return this.$store.getters.STAFF;
       }
+    },
+    mounted() {
+      this.$store.dispatch('GET_STAFF_API');
     }
 }
 </script>
