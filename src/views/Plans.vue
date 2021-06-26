@@ -155,7 +155,7 @@ export default {
     return {
       date: new Date().toISOString().substr(0, 7),
       menuPickers: false,
-      emplayees: ['Артем Белый', 'Денис Новичков', 'Денис Хренов', 'Алена Попова', 'Роман Зимин', 'Роман Кычин', 'Сергей Егай', 'Сергей Хомяков', 'Михайл Твердохлеб', 'Филипп Рацков', 'Артем Соколов', 'Александр Артемов', 'Екатерина Ким', 'Владимир Зудилин', 'Дарья Белая'],
+      //emplayees: ['Артем Белый', 'Денис Новичков', 'Денис Хренов', 'Алена Попова', 'Роман Зимин', 'Роман Кычин', 'Сергей Егай', 'Сергей Хомяков', 'Михайл Твердохлеб', 'Филипп Рацков', 'Артем Соколов', 'Александр Артемов', 'Екатерина Ким', 'Владимир Зудилин', 'Дарья Белая'],
       selectedEmplayees: [],
       plans: ['Исходящие звонки', 'Отправлено КП', 'Проведено встреч', 'Заключено договоров', 'Закрыто сделок', 'Сумма сделок'],
       selectedPlans: undefined,
@@ -199,6 +199,10 @@ export default {
       if (this.likesAllEmplayee) return 'mdi-close-box'
       if (this.likesSomeEmplayee) return 'mdi-minus-box'
       return 'mdi-checkbox-blank-outline'
+    },
+    emplayees () {
+      let arr = this.$store.getters.CHANGE_STAFF; 
+      return [...new Set(arr.map(item => item.name))];
     }
   }
 };
