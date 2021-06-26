@@ -23,18 +23,20 @@
   export default {
     props: ['dataPlans', 'dataEmplayees'],
     methods: {
-      staffObj (name) {
-        return {name: name, plan: 0, fact: 0, factpercent: 0}
-      },
       removeNewStaff () {
         this.newStaff.splice(0, this.newStaff.length)
       }
     },
     computed: {
       staffArr () {
-        this.removeNewStaff()
-        this.dataEmplayees.forEach(element => {
-          this.newStaff.push(this.staffObj(element))
+        this.removeNewStaff();
+        const changeStaff = this.$store.getters.CHANGE_STAFF; 
+        this.dataEmplayees.forEach(elem => {
+          changeStaff.forEach(item => {
+            if (elem == item.name) {
+              this.newStaff.push(item);
+            }
+          })
         });
         return this.newStaff
       }
@@ -45,26 +47,42 @@
         newStaff: [],
         headers: [
           {
-            text: 'Сотрудники',
+            text: 'ID',
+            align: 'start',
+            value: 'id',
+            sortable: false,
+          },
+          {
+            text: 'ФИО',
             align: 'start',
             value: 'name',
-          },
-          { text: 'План', value: 'plan' },
-          { text: 'Факт', value: 'fact' },
-          { text: 'Факт (%)', value: 'factpercent' }
-        ],
-        staff: [ // не используется, пример объекта для таблицы
-          {
-            name: 'Денис Хренов',
-            plan: 159,
-            fact: 6,
-            factpercent: 24
+            sortable: false,
           },
           {
-            name: 'Алена Попова',
-            plan: 237,
-            fact: 9,
-            factpercent: 37
+            text: 'Должность',
+            align: 'start',
+            value: 'username',
+            sortable: false,
+          },
+          { text: 'E-mail', 
+            align: 'start',
+            value: 'email',
+            sortable: false
+          },
+          { text: 'Факт', 
+            align: 'start',
+            value: 'fact',
+            sortable: false
+          },
+          { text: 'План', 
+            align: 'start',
+            value: 'plan',
+            sortable: false
+          },
+          { text: '% выполнения', 
+            align: 'start',
+            value: 'pla',
+            sortable: false
           }
         ],
       }

@@ -65,9 +65,6 @@
   export default {
     props: ['selectedPlans', 'dataEmplayees'],
     methods: {
-      staffObj (name) {
-        return { name: name, plan: 0 }
-      },
       removeNewStaff () {
         this.newStaff.splice(0, this.newStaff.length)
       },
@@ -82,9 +79,14 @@
     },
     computed: {
       staffArr () {
-        this.removeNewStaff()
-        this.dataEmplayees.forEach(element => {
-          this.newStaff.push(this.staffObj(element))
+        this.removeNewStaff();
+        const changeStaff = this.$store.getters.CHANGE_STAFF; 
+        this.dataEmplayees.forEach(elem => {
+          changeStaff.forEach(item => {
+            if (elem == item.name) {
+              this.newStaff.push(item);
+            }
+          })
         });
         return this.newStaff
       }
@@ -95,12 +97,30 @@
         newStaff: [],
         headers: [
           {
-            text: 'Сотрудники',
+            text: 'ID',
+            align: 'start',
+            value: 'id',
+            sortable: false,
+          },
+          {
+            text: 'ФИО',
             align: 'start',
             value: 'name',
             sortable: false,
           },
+          {
+            text: 'Должность',
+            align: 'start',
+            value: 'username',
+            sortable: false,
+          },
+          { text: 'E-mail', 
+            align: 'start',
+            value: 'email',
+            sortable: false
+          },
           { text: 'План', 
+            align: 'start',
             value: 'plan',
             sortable: false
           }
