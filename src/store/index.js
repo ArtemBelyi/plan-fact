@@ -15,6 +15,9 @@ export default new Vuex.Store({
     },
     SET_CHANGE_STAFF: (state, addStaff) => {
       state.changeStaff = addStaff;
+    },
+    REMOVE_ELEM_CHANGE_STAFF: (state, editedIndex) => {
+      state.changeStaff.splice(editedIndex, 1);
     }
   },
   actions: {
@@ -31,6 +34,9 @@ export default new Vuex.Store({
     },
     GET_CHANGESTAFF({ commit }, addStaff) {
       return commit('SET_CHANGE_STAFF', addStaff);
+    },
+    REMOVE_ELEM_CHANGE_STAFF( {commit}, editedIndex ) {
+      return commit('REMOVE_ELEM_CHANGE_STAFF', editedIndex);
     }
   },
   getters: {

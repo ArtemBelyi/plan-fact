@@ -128,7 +128,7 @@
         snack: false,
         snackColor: '',
         snackText: '',
-        max25chars: v => v.length <= 25 || 'Input too long!',
+        max25chars: v => v.length <= 25 || 'Input too long!', //выдает ошибку так как plans сейчас нет
         pagination: {}
       }
     },
