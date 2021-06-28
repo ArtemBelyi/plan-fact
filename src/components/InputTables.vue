@@ -29,9 +29,9 @@
             <div class="mt-4 text-h6">
               Введите план
             </div>
+            <!--:rules="[max25chars]"-->
             <v-text-field
               v-model="item.plan"
-              :rules="[max25chars]"
               label="Edit"
               single-line
               counter
@@ -72,6 +72,8 @@
         this.snack = true
         this.snackColor = 'success'
         this.snackText = 'Data saved'
+        console.log(this.newStaff);
+        console.log(this.$store.state.changeStaff);
       },
       close () {
         console.log('Dialog closed')
@@ -128,7 +130,7 @@
         snack: false,
         snackColor: '',
         snackText: '',
-        max25chars: v => v.length <= 25 || 'Input too long!', //выдает ошибку так как plans сейчас нет
+        //max25chars: v => v.length <= 25 || 'Input too long!', //выдает ошибку так как plans сейчас нет
         pagination: {}
       }
     },
