@@ -17,47 +17,17 @@
       :search="search"
     >
     <template v-slot:[`item.plans`]="{ item }">
-      <v-edit-dialog
-          :return-value.sync="item.plans"
-          large
-          persistent
-          @save="save"
-          @close="close"
-        >
-        <div>{{ item.plans }}</div>
-        <template v-slot:input>
-            <div class="mt-4 text-h6">
-              Введите план
-            </div>
-            <!--:rules="[max25chars]"-->
-            <v-text-field
-              label="Edit"
-              single-line
-              counter
-              autofocus
-              v-on:change="planschange(item, $event)"
-            ></v-text-field>
-          </template>
-        </v-edit-dialog>
+      <v-text-field
+        label="Введите план"
+        single-line
+        counter
+        autofocus
+        return-value
+        v-on:change="planschange(item, $event)"
+      >
+      </v-text-field>
     </template>
     </v-data-table>
-    <v-snackbar
-      v-model="snack"
-      :timeout="1500"
-      :color="snackColor"
-    >
-      {{ snackText }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          v-bind="attrs"
-          text
-          @click="snack = false"
-        >
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
   </v-card>
 </template>
 
@@ -68,18 +38,14 @@
       removeNewStaff () {
         this.newStaff.splice(0, this.newStaff.length)
       },
-      save () {
-        this.snack = true
-        this.snackColor = 'success'
-        this.snackText = 'Data saved'
-        console.log(this.newStaff);
-        console.log(this.$store.state.changeStaff);
-      },
-      close () {
-        console.log('Dialog closed')
-      },
-      planschange (a,b) {
-        console.log(a, b);
+      planschange (item, event) {
+       if (item.plans) {
+         item.plans.push({name: this.selectedPlans, target: event})
+       } else {
+         item.plans = [{name: this.selectedPlans, target: event}]
+       }
+       console.log(this.staffArr);
+       console.log(this.$store.state.changeStaff);
       }
     },
     computed: {
