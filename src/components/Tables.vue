@@ -76,12 +76,12 @@
           },
           { text: 'План', 
             align: 'start',
-            value: 'plan',
+            value: 'plans',
             sortable: false
           },
           { text: '% выполнения', 
             align: 'start',
-            value: 'pla',
+            value: 'plans',
             sortable: false
           }
         ],

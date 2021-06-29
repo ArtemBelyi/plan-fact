@@ -16,26 +16,26 @@
       :items="staffArr"
       :search="search"
     >
-    <template v-slot:[`item.plan`]="{ item }">
+    <template v-slot:[`item.plans`]="{ item }">
       <v-edit-dialog
-          :return-value.sync="item.plan"
+          :return-value.sync="item.plans"
           large
           persistent
           @save="save"
           @close="close"
         >
-        <div>{{ item.plan }}</div>
+        <div>{{ item.plans }}</div>
         <template v-slot:input>
             <div class="mt-4 text-h6">
               Введите план
             </div>
             <!--:rules="[max25chars]"-->
             <v-text-field
-              v-model="item.plan"
               label="Edit"
               single-line
               counter
               autofocus
+              v-on:change="planschange(item, $event)"
             ></v-text-field>
           </template>
         </v-edit-dialog>
@@ -77,6 +77,9 @@
       },
       close () {
         console.log('Dialog closed')
+      },
+      planschange (a,b) {
+        console.log(a, b);
       }
     },
     computed: {
@@ -123,7 +126,7 @@
           },
           { text: 'План', 
             align: 'start',
-            value: 'plan',
+            value: 'plans',
             sortable: false
           }
         ],
