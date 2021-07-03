@@ -28,12 +28,13 @@
       },
       insertPlans (arr, name) {
         let props;
-        for (let i = 0; i <= arr.length; i++) {
-        props = Object.values(arr[i]).includes(name)
-        return props;
+
+          for (let i = 0; i < arr.length; i++) {
+          props = Object.values(arr[i]).includes(name)
+          return props;
         }
         return props;
-      }
+        }
     },
     computed: {
       staffArr () {
@@ -41,7 +42,7 @@
         const changeStaff = this.$store.getters.CHANGE_STAFF; 
         this.dataEmplayees.forEach(elem => {
           changeStaff.forEach(item => {
-            if (elem == item.name && this.insertPlans (item.plans, this.dataPlans)) {
+            if (elem == item.name && item.plans && this.insertPlans (item.plans, this.dataPlans)) {
               this.newStaff.push(item);
               console.log(this.newStaff);
               console.log(this.$store.state.changeStaff);
