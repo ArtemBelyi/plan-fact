@@ -25,6 +25,14 @@
     methods: {
       removeNewStaff () {
         this.newStaff.splice(0, this.newStaff.length)
+      },
+      insertPlans (arr, name) {
+        let props;
+        for (let i = 0; i <= arr.length; i++) {
+        props = Object.values(arr[i]).includes(name)
+        return props;
+        }
+        return props;
       }
     },
     computed: {
@@ -33,8 +41,12 @@
         const changeStaff = this.$store.getters.CHANGE_STAFF; 
         this.dataEmplayees.forEach(elem => {
           changeStaff.forEach(item => {
-            if (elem == item.name) {
+            if (elem == item.name && this.insertPlans (item.plans, this.dataPlans)) {
               this.newStaff.push(item);
+              console.log(this.newStaff);
+              console.log(this.$store.state.changeStaff);
+            } else {
+              console.log('Нет');
             }
           })
         });
