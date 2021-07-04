@@ -15,7 +15,11 @@
       :headers="headers"
       :items="staffArr"
       :search="search"
-    ></v-data-table>
+    >
+    <template v-slot:[`item.plans`]="{ item }">
+        {{ itemPlans(item.plans) }}
+    </template>
+    </v-data-table>
   </v-card>
 </template>
 
@@ -27,14 +31,23 @@
         this.newStaff.splice(0, this.newStaff.length)
       },
       insertPlans (arr, name) {
-        let props;
-
+        let props = false;
           for (let i = 0; i < arr.length; i++) {
-          props = Object.values(arr[i]).includes(name)
-          return props;
-        }
+            if (Object.values(arr[i]).includes(name)) {
+              props = true
+            }
+          }
         return props;
-        }
+      },
+      itemPlans (arr) {
+        let prop;
+        arr.forEach(item => {
+          if (item.name == this.dataPlans) {
+            prop = item.target;
+          }
+        })
+        return prop;
+      }
     },
     computed: {
       staffArr () {
@@ -44,10 +57,6 @@
           changeStaff.forEach(item => {
             if (elem == item.name && item.plans && this.insertPlans (item.plans, this.dataPlans)) {
               this.newStaff.push(item);
-              console.log(this.newStaff);
-              console.log(this.$store.state.changeStaff);
-            } else {
-              console.log('Нет');
             }
           })
         });
@@ -94,7 +103,7 @@
           },
           { text: '% выполнения', 
             align: 'start',
-            value: 'plans',
+            value: 'plansPercent',
             sortable: false
           }
         ],
